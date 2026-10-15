@@ -62,8 +62,10 @@
     <xsl:value-of select="concat($publisher, '&#9;')"/>
     <xsl:value-of select="concat($volume, '&#9;')"/>
     <xsl:value-of select="concat($issue, '&#9;')"/>
-    <xsl:value-of select="concat($URN, '&#9;')"/>
-    <xsl:value-of select="concat($URL, '&#9;')"/>
+    <!-- Keep every identifier in its TSV field using the shared separator.
+         concat() requires a single value and fails for multiple idno elements. -->
+    <xsl:value-of select="concat(string-join($URN, $multi-separator), '&#9;')"/>
+    <xsl:value-of select="concat(string-join($URL, $multi-separator), '&#9;')"/>
     <!-- Paragraph metadata -->
     <xsl:value-of select="concat($lang, '&#9;')"/>
     <xsl:value-of select="concat($quality, '&#9;')"/>
